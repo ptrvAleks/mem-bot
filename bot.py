@@ -31,6 +31,11 @@ async def my_handler(message: Message):
     photo = FSInputFile("images/angry_cat.jpg")
     await message.answer_photo(photo)
 
+@router.message(F.text.contains("Виктор"))
+async def my_handler(message: Message):
+    photo = FSInputFile("images/angry_cat_important.jpeg")
+    await message.answer_photo(photo)
+
 
 async def main():
     await dp.start_polling(bot)
