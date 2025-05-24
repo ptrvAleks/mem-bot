@@ -36,6 +36,16 @@ async def my_handler(message: Message):
     photo = FSInputFile("images/angry_cat_important.jpeg")
     await message.answer_photo(photo)
 
+@router.message(F.text.lower().contains("в отпуск"))
+async def my_handler(message: Message):
+    await message.answer("Отпуск - это состояние души, но тикет сам себя не сделает")
+
+@router.message()
+async def my_handler(message: Message):
+    text = message.text.lower()  # приводим к нижнему регистру
+    if any(word in text for word in ["ебать", "охуеть", "бля", "блять", "пиздец"]):
+        photo = FSInputFile("images/ebat.jpg")
+        await message.answer_photo(photo)
 
 async def main():
     await dp.start_polling(bot)
