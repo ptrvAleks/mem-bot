@@ -40,13 +40,6 @@ async def my_handler(message: Message):
 async def my_handler(message: Message):
     await message.answer("Отпуск - это состояние души, но тикет сам себя не сделает")
 
-@router.message()
-async def my_handler(message: Message):
-    text = message.text.lower()  # приводим к нижнему регистру
-    if any(word in text for word in ["ебать", "охуеть", "бля", "блять", "пиздец"]):
-        photo = FSInputFile("images/ebat.jpg")
-        await message.answer_photo(photo)
-
 @router.message(F.text.lower().contains("перекур"))
 async def my_handler(message: Message):
     await message.answer('Записал перекур в Jira как "исследование дымовых сигналов".')
@@ -54,6 +47,13 @@ async def my_handler(message: Message):
 @router.message(F.text.lower().contains("лень"))
 async def my_handler(message: Message):
     await message.answer('Лень — это когда ты читаешь таску и надеешься, что она решится от взгляда.')
+
+@router.message()
+async def my_handler(message: Message):
+    text = message.text.lower()  # приводим к нижнему регистру
+    if any(word in text for word in ["ебать", "охуеть", "бля", "блять", "пиздец"]):
+        photo = FSInputFile("images/ebat.jpg")
+        await message.answer_photo(photo)
 
 async def main():
     await dp.start_polling(bot)
